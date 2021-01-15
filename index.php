@@ -40,6 +40,26 @@ $posts = [
     'avatar' => 'userpic.jpg',
   ],
 ];
+
+function limit_text ($text, $max_symbols=300) {
+  $words = explode(' ', $text);
+  $first_words = [];
+  $words_length = 0;
+  $is_more_than_max_symbols = false;
+
+  foreach ($words as $word) {
+    $words_length += strlen(utf8_decode($word)) + 1;
+    $first_words[] = $word;
+
+    if ($words_length - 1 >= $max_symbols) {
+      $is_more_than_max_symbols = true;
+      break;
+    }
+  }
+
+  return $is_more_than_max_symbols ? 
+    '<p>' . implode(' ', $first_words) . '...</p><a class="post-text__more-link" href="#">Читать далее</a>' : '<p>' . $text . '</p>';
+}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -300,7 +320,7 @@ $posts = [
 
                         <?php case 'post-text': ?>
                             <!--содержимое для поста-текста-->
-                            <p><?= $post['content']; ?></p>
+                            <?= limit_text($post['content']); ?>
                         <?php break; ?>
                         <?php endswitch; ?>
                     </div>
