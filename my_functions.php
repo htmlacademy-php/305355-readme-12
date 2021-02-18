@@ -27,36 +27,11 @@
       '<p>' . implode(' ', $first_words) . '...</p><a class="post-text__more-link" href="#">Читать далее</a>' : '<p>' . $text . '</p>';
   }
 
-  // function get_interval_description ($date_interval) {
-  //   $description = "";
-  //   var_dump($date_interval->i);
-
-  //   switch (true) {
-  //     case ($date_interval->i < 60):
-  //       $noun_plural_form = get_noun_plural_form($date_interval->i, 'минута', 'минуты', 'минут');
-  //       $description = "$date_interval->i $noun_plural_form назад";
-  //       break;
-  //     case (($date_interval->i >= 60) && ($date_interval->h < 24)):
-  //       $noun_plural_form = get_noun_plural_form($date_interval->h, 'час', 'часа', 'часов');
-  //       $description = "$date_interval->i $noun_plural_form назад";
-  //       break;
-  //     case (($date_interval->h >= 24) && ($date_interval->d < 7)):
-  //       $noun_plural_form = get_noun_plural_form($date_interval->i, 'день', 'дня', 'дней');
-  //       $description = "$date_interval->i $noun_plural_form назад";
-  //       break;
-  //     case (($date_interval->d >= 7) && ($date_interval->d < 5 * 7)):
-  //       $noun_plural_form = get_noun_plural_form($date_interval->i, 'неделя', 'недели', 'недель');
-  //       $description = "$date_interval->i $noun_plural_form назад";
-  //       break;
-  //     case ($date_interval->d >= 5 * 7):
-  //       $noun_plural_form = get_noun_plural_form($date_interval->i, 'месяц', 'месяца', 'месяцев');
-  //       $description = "$date_interval->i $noun_plural_form назад";
-  //       break;
-  //   }
-
-  //   return $description;
-  // }
-
+  /**
+   * Возвращает промежуток времени с момента публикации поста
+   * @param object $date_interval объект типа DateInterval
+   * @return string строка с указанным промежутком времени
+   */
   function get_interval_description ($date_interval) {
     $description = "";
 
