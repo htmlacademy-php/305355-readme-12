@@ -52,7 +52,7 @@ $layout = include_template('layout.php', [
     'is_auth' => $is_auth,
     'user_name' => $user_name,
     'main_content' => $main_content,
-    'page_title' => "readme: популярное",
+    'page_title' => 'readme: популярное',
   ]
 );
 echo $layout;
