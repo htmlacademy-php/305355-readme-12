@@ -97,7 +97,7 @@
                                 <p>
                                     <?= htmlspecialchars($post['content']); ?>
                                 </p>
-                                <cite>Неизвестный Автор</cite>
+                                <cite><?= htmlspecialchars($post['quote_author']); ?></cite>
                             </blockquote>
                         <?php break; ?>
                         
