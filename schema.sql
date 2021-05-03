@@ -8,21 +8,21 @@ CREATE TABLE users (
   id INT AUTO_INCREMENT,
   name CHAR(128) NOT NULL,
   email CHAR(128) NOT NULL UNIQUE,
-  password CHAR(64) NOT NULL,
+  password CHAR(128) NOT NULL,
   avatar CHAR(128),
   PRIMARY KEY (id)
 );
 
 CREATE TABLE hashtags (
   id INT AUTO_INCREMENT,
-  title CHAR(64) NOT NULL,
+  title CHAR(128) NOT NULL,
   PRIMARY KEY (id)
 );
 
 CREATE TABLE content_types (
   id INT AUTO_INCREMENT,
-  title ENUM('Текст', 'Цитата', 'Картинка', 'Видео', 'Ссылка'),
-  class_name ENUM('photo', 'video', 'text', 'quote', 'link'),
+  title CHAR(128),
+  class_name CHAR(128),
   PRIMARY KEY (id)
 );
 
@@ -31,18 +31,16 @@ CREATE TABLE posts (
   create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   title CHAR(128) NOT NULL,
   text_content TEXT,
-  author_name CHAR(128),
+  quote_author CHAR(128),
   image_src CHAR(128),
   video_src CHAR(128),
   page_src CHAR(128),
   views_amount INT,
   user_id INT,
   content_type_id INT,
-  hashtag_id INT,
   PRIMARY KEY (id),
   FOREIGN KEY (user_id) REFERENCES users(id),
-  FOREIGN KEY (content_type_id) REFERENCES content_types(id),
-  FOREIGN KEY (hashtag_id) REFERENCES hashtags(id)
+  FOREIGN KEY (content_type_id) REFERENCES content_types(id)
 );
 
 CREATE TABLE comments (
@@ -69,7 +67,6 @@ CREATE TABLE subscriptions (
   user_id INT,
   follower_id INT,
   PRIMARY KEY (id),
-  FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
@@ -82,4 +79,13 @@ CREATE TABLE messages (
   PRIMARY KEY (id),
   FOREIGN KEY (sender_id) REFERENCES users(id),
   FOREIGN KEY (receiver_id) REFERENCES users(id)
+);
+
+CREATE TABLE post_hashtags (
+  id INT AUTO_INCREMENT,
+  post_id INT,
+  hashtag_id INT,
+  PRIMARY KEY (id),
+  FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
+  FOREIGN KEY (hashtag_id) REFERENCES hashtags(id) ON DELETE CASCADE
 );
