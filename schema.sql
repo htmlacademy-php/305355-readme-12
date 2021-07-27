@@ -6,35 +6,35 @@ USE readme;
 
 CREATE TABLE users (
   id INT AUTO_INCREMENT,
-  name CHAR(128) NOT NULL,
-  email CHAR(128) NOT NULL UNIQUE,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(320) NOT NULL UNIQUE,
   password CHAR(128) NOT NULL,
-  avatar CHAR(128),
+  avatar VARCHAR(255),
   PRIMARY KEY (id)
 );
 
 CREATE TABLE hashtags (
   id INT AUTO_INCREMENT,
-  title CHAR(128) NOT NULL,
+  title VARCHAR(128) NOT NULL,
   PRIMARY KEY (id)
 );
 
 CREATE TABLE content_types (
   id INT AUTO_INCREMENT,
-  title CHAR(128),
-  class_name CHAR(128),
+  title VARCHAR(128),
+  class_name VARCHAR(128),
   PRIMARY KEY (id)
 );
 
 CREATE TABLE posts (
   id INT AUTO_INCREMENT,
   create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  title CHAR(128) NOT NULL,
+  title VARCHAR(128) NOT NULL,
   text_content TEXT,
-  quote_author CHAR(128),
-  image_src CHAR(128),
-  video_src CHAR(128),
-  page_src CHAR(128),
+  quote_author VARCHAR(255),
+  image_src VARCHAR(255),
+  video_src VARCHAR(255),
+  page_src VARCHAR(255),
   views_amount INT,
   user_id INT,
   content_type_id INT,
