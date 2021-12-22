@@ -36,51 +36,22 @@
                 <b class="popular__filters-caption filters__caption">Тип контента:</b>
                 <ul class="popular__filters-list filters__list">
                   <li class="popular__filters-item popular__filters-item--all filters__item filters__item--all">
-                      <a class="filters__button filters__button--ellipse filters__button--all filters__button--active" href="#">
+                      <a class="filters__button filters__button--ellipse filters__button--all <?= $content_type_id ? '' : 'filters__button--active' ?>" href="index.php">
                           <span>Все</span>
                       </a>
                   </li>
                   <?php foreach ($content_types as $index => $content_type): ?>
                     <li class="popular__filters-item filters__item">
-                        <a class="filters__button filters__button--<?= $content_type['class_name']; ?> button" href="#">
+                        <a
+                          class="filters__button <?= ($content_type_id == $content_type['id']) ? 'filters__button--active' : '' ?> filters__button--<?= $content_type['class_name']; ?> button"
+                          href="index.php?content_type_id=<?= $content_type['id']; ?>"
+                        >
                             <span class="visually-hidden"><?= $content_type['title']; ?></span>
                             <svg class="filters__icon" width="22" height="18">
                                 <use xlink:href="#icon-filter-<?= $content_type['class_name']; ?>"></use>
                             </svg>
                         </a>
                     </li>
-                    <!-- <li class="popular__filters-item filters__item">
-                        <a class="filters__button filters__button--video button" href="#">
-                            <span class="visually-hidden">Видео</span>
-                            <svg class="filters__icon" width="24" height="16">
-                                <use xlink:href="#icon-filter-video"></use>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="popular__filters-item filters__item">
-                        <a class="filters__button filters__button--text button" href="#">
-                            <span class="visually-hidden">Текст</span>
-                            <svg class="filters__icon" width="20" height="21">
-                                <use xlink:href="#icon-filter-text"></use>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="popular__filters-item filters__item">
-                        <a class="filters__button filters__button--quote button" href="#">
-                            <span class="visually-hidden">Цитата</span>
-                            <svg class="filters__icon" width="21" height="20">
-                                <use xlink:href="#icon-filter-quote"></use>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="popular__filters-item filters__item">
-                        <a class="filters__button filters__button--link button" href="#">
-                            <span class="visually-hidden">Ссылка</span>
-                            <svg class="filters__icon" width="21" height="18">
-                                <use xlink:href="#icon-filter-link"></use>
-                            </svg>
-                        </a>
-                    </li> -->
                   <?php endforeach; ?>
                 </ul>
             </div>
@@ -89,7 +60,7 @@
             <?php foreach ($posts as $index => $post): ?>
                 <article class="popular__post post post-<?= $post['content_type'] ?>">
                     <header class="post__header">
-                        <h2><?= htmlspecialchars($post['title']); ?></h2>
+                        <h2><a href="post.php?id=<?= $post['id'] ?>"><?= htmlspecialchars($post['title']); ?></a></h2>
                     </header>
                     <div class="post__main">
                         <!--здесь содержимое карточки-->

@@ -44,3 +44,4 @@ INSERT INTO likes (user_id, post_id) VALUES (2, 2);
 
 -- подписаться на пользователя
 INSERT INTO subscriptions (user_id, follower_id) VALUES (1, 2);
+INSERT INTO subscriptions (user_id, follower_id) VALUES (1, 3);
