@@ -22,7 +22,7 @@ CREATE TABLE hashtags (
 CREATE TABLE content_types (
   id INT AUTO_INCREMENT,
   title VARCHAR(128),
-  class_name CHAR(128),
+  class_name VARCHAR(128),
   PRIMARY KEY (id)
 );
 
