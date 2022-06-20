@@ -2,53 +2,15 @@
 
 require_once('helpers.php');
 require_once('my_functions.php');
+require_once('init.php');
+require_once('models.php');
 
-$is_auth = rand(0, 1);
+$content_type_id = $_GET['content_type_id'] ?? '';
 
-$user_name = 'Oleg'; // укажите здесь ваше имя
+$content_types = get_content_types($con);
+$posts = get_posts($con, $content_type_id);
 
-$posts = [
-  [
-    'title' => 'Цитата',	
-    'type' => 'post-quote',	
-    'content' => 'Мы в жизни любим только раз, а после ищем лишь похожих',
-    'name' => 'Лариса',
-    'avatar' => 'userpic-larisa-small.jpg',
-    'quote_author' => 'Неизвестный автор'
-  ],
-  [
-    'title' => 'Игра престолов',
-    'type' => 'post-text',
-    'content' => 'Не могу дождаться начала финального сезона своего любимого сериала!',
-    'name' => 'Владик',
-    'avatar' => 'userpic.jpg',
-  ],
-  [
-    'title' => 'Наконец, обработал фотки!',
-    'type' => 'post-photo',
-    'content' => 'rock-medium.jpg',
-    'name' => 'Виктор',
-    'avatar' => 'userpic-mark.jpg',
-  ],
-  [
-    'title' => 'Моя мечта',
-    'type' => 'post-photo',
-    'content' => 'coast-medium.jpg',
-    'name' => 'Лариса',
-    'avatar' => 'userpic-larisa-small.jpg',
-  ],
-  [
-    'title' => 'Лучшие курсы',
-    'type' => 'post-link',
-    'content' => 'www.htmlacademy.ru',
-    'name' => 'Владик',
-    'avatar' => 'userpic.jpg',
-  ],
-];
-
-
-
-$main_content = include_template('main.php', ['posts' => $posts]);
+$main_content = include_template('main.php', ['posts' => $posts, 'content_types' => $content_types, 'content_type_id' => $content_type_id]);
 $layout = include_template('layout.php', [
     'is_auth' => $is_auth,
     'user_name' => $user_name,
@@ -57,4 +19,5 @@ $layout = include_template('layout.php', [
   ]
 );
 echo $layout;
+
 ?>

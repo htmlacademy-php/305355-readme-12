@@ -35,76 +35,49 @@
             <div class="popular__filters filters">
                 <b class="popular__filters-caption filters__caption">Тип контента:</b>
                 <ul class="popular__filters-list filters__list">
-                    <li class="popular__filters-item popular__filters-item--all filters__item filters__item--all">
-                        <a class="filters__button filters__button--ellipse filters__button--all filters__button--active" href="#">
-                            <span>Все</span>
-                        </a>
-                    </li>
+                  <li class="popular__filters-item popular__filters-item--all filters__item filters__item--all">
+                      <a class="filters__button filters__button--ellipse filters__button--all <?= $content_type_id ? '' : 'filters__button--active' ?>" href="index.php">
+                          <span>Все</span>
+                      </a>
+                  </li>
+                  <?php foreach ($content_types as $index => $content_type): ?>
                     <li class="popular__filters-item filters__item">
-                        <a class="filters__button filters__button--photo button" href="#">
-                            <span class="visually-hidden">Фото</span>
+                        <a
+                          class="filters__button <?= ($content_type_id == $content_type['id']) ? 'filters__button--active' : '' ?> filters__button--<?= $content_type['class_name']; ?> button"
+                          href="index.php?content_type_id=<?= $content_type['id']; ?>"
+                        >
+                            <span class="visually-hidden"><?= $content_type['title']; ?></span>
                             <svg class="filters__icon" width="22" height="18">
-                                <use xlink:href="#icon-filter-photo"></use>
+                                <use xlink:href="#icon-filter-<?= $content_type['class_name']; ?>"></use>
                             </svg>
                         </a>
                     </li>
-                    <li class="popular__filters-item filters__item">
-                        <a class="filters__button filters__button--video button" href="#">
-                            <span class="visually-hidden">Видео</span>
-                            <svg class="filters__icon" width="24" height="16">
-                                <use xlink:href="#icon-filter-video"></use>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="popular__filters-item filters__item">
-                        <a class="filters__button filters__button--text button" href="#">
-                            <span class="visually-hidden">Текст</span>
-                            <svg class="filters__icon" width="20" height="21">
-                                <use xlink:href="#icon-filter-text"></use>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="popular__filters-item filters__item">
-                        <a class="filters__button filters__button--quote button" href="#">
-                            <span class="visually-hidden">Цитата</span>
-                            <svg class="filters__icon" width="21" height="20">
-                                <use xlink:href="#icon-filter-quote"></use>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="popular__filters-item filters__item">
-                        <a class="filters__button filters__button--link button" href="#">
-                            <span class="visually-hidden">Ссылка</span>
-                            <svg class="filters__icon" width="21" height="18">
-                                <use xlink:href="#icon-filter-link"></use>
-                            </svg>
-                        </a>
-                    </li>
+                  <?php endforeach; ?>
                 </ul>
             </div>
         </div>
         <div class="popular__posts">
             <?php foreach ($posts as $index => $post): ?>
-                <article class="popular__post post <?= $post['type'] ?>">
+                <article class="popular__post post post-<?= $post['content_type'] ?>">
                     <header class="post__header">
-                        <h2><?= htmlspecialchars($post['title']); ?></h2>
+                        <h2><a href="post.php?id=<?= $post['id'] ?>"><?= htmlspecialchars($post['title']); ?></a></h2>
                     </header>
                     <div class="post__main">
                         <!--здесь содержимое карточки-->
-                        <?php switch ($post['type']):
-                          case 'post-quote': ?>
+                        <?php switch ($post['content_type']):
+                          case 'quote': ?>
                             <blockquote>
                                 <p>
-                                    <?= htmlspecialchars($post['content']); ?>
+                                    <?= htmlspecialchars($post['text_content']); ?>
                                 </p>
                                 <cite><?= htmlspecialchars($post['quote_author']); ?></cite>
                             </blockquote>
                         <?php break; ?>
                         
-                        <?php case 'post-link': ?>  
+                        <?php case 'link': ?>  
                             <!--содержимое для поста-ссылки-->
                             <div class="post-link__wrapper">
-                                <a class="post-link__external" href="http://" title="Перейти по ссылке">
+                                <a class="post-link__external" href="http://<?= htmlspecialchars($post['page_src']); ?>" title="Перейти по ссылке">
                                     <div class="post-link__info-wrapper">
                                         <div class="post-link__icon-wrapper">
                                             <img src="https://www.google.com/s2/favicons?domain=vitadental.ru" alt="Иконка">
@@ -113,23 +86,23 @@
                                             <h3><?= htmlspecialchars($post['title']); ?></h3>
                                         </div>
                                     </div>
-                                    <span><?= htmlspecialchars($post['content']); ?></span>
+                                    <span><?= htmlspecialchars($post['page_src']); ?></span>
                                 </a>
                             </div>
                         <?php break; ?>
 
-                        <?php case 'post-photo': ?>
+                        <?php case 'photo': ?>
                             <!--содержимое для поста-фото-->
                             <div class="post-photo__image-wrapper">
-                                <img src="img/<?= $post['content']; ?>" alt="Фото от пользователя <?= $post['name']; ?>" width="360" height="240">
+                                <img src="img/<?= $post['image_src']; ?>" alt="Фото от пользователя <?= $post['user_name']; ?>" width="360" height="240">
                             </div>
                         <?php break; ?>
 
-                        <?php case 'post-video': ?>
+                        <?php case 'video': ?>
                             <!--содержимое для поста-видео-->
                             <div class="post-video__block">
                                 <div class="post-video__preview">
-                                    <?=embed_youtube_cover(htmlspecialchars($post['content'])); ?>
+                                    <?=embed_youtube_cover(htmlspecialchars($post['video_src'])); ?>
                                     <img src="img/coast-medium.jpg" alt="Превью к видео" width="360" height="188">
                                 </div>
                                 <a href="post-details.html" class="post-video__play-big button">
@@ -141,9 +114,9 @@
                             </div>
                         <?php break; ?>
 
-                        <?php case 'post-text': ?>
+                        <?php case 'text': ?>
                             <!--содержимое для поста-текста-->
-                            <?= limit_text(htmlspecialchars($post['content'])); ?>
+                            <?= limit_text(htmlspecialchars($post['text_content'])); ?>
                         <?php break; ?>
                         <?php endswitch; ?>
                     </div>
@@ -155,11 +128,11 @@
                                     <img
                                       class="post__author-avatar"
                                       src="img/<?= $post['avatar']; ?>"
-                                      alt="Аватар пользователя <?= htmlspecialchars($post['name']); ?>"
+                                      alt="Аватар пользователя <?= htmlspecialchars($post['user_name']); ?>"
                                     >
                                 </div>
                                 <div class="post__info">
-                                    <b class="post__author-name"><?= htmlspecialchars($post['name']); ?></b>
+                                    <b class="post__author-name"><?= htmlspecialchars($post['user_name']); ?></b>
                                     <?php $random_date = generate_random_date($index); ?>
                                     <?php $date_interval = date_diff(date_create($random_date), date_create("now")); ?>
                                     <time

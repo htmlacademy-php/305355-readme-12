@@ -11,16 +11,16 @@ INSERT INTO users (name, email, password, avatar) VALUES ('Дмитрий', 'dmi
 INSERT INTO users (name, email, password, avatar) VALUES ('table_man', 'table@man.site', 0, 'userpic-mark.jpg');
 
 -- добавление постов
-INSERT INTO posts (user_id, content_type_id, title, text_content, quote_author)
-  VALUES (1, 2, 'Цитата', 'Мы в жизни любим только раз, а после ищем лишь похожих', 'Неизвестный автор');
-INSERT INTO posts (user_id, content_type_id, title, text_content)
-  VALUES (2, 1, 'Игра престолов', 'Не могу дождаться начала финального сезона своего любимого сериала!');
-INSERT INTO posts (user_id, content_type_id, title, image_src)
-  VALUES (1, 3, 'Наконец, обработал фотки!', 'userpic.jpg');
-INSERT INTO posts (user_id, content_type_id, title, image_src)
-  VALUES (2, 3, 'Моя мечта', 'coast-medium.jpg');
-INSERT INTO posts (user_id, content_type_id, title, page_src)
-  VALUES (1, 5, 'Лучшие курсы', 'www.htmlacademy.ru');
+INSERT INTO posts (user_id, content_type_id, title, text_content, quote_author, views_amount)
+  VALUES (1, 2, 'Цитата', 'Мы в жизни любим только раз, а после ищем лишь похожих', 'Неизвестный автор', 5);
+INSERT INTO posts (user_id, content_type_id, title, text_content, views_amount)
+  VALUES (2, 1, 'Игра престолов', 'Не могу дождаться начала финального сезона своего любимого сериала!', 3);
+INSERT INTO posts (user_id, content_type_id, title, image_src, views_amount)
+  VALUES (1, 3, 'Наконец, обработал фотки!', 'userpic.jpg', 17);
+INSERT INTO posts (user_id, content_type_id, title, image_src, views_amount)
+  VALUES (2, 3, 'Моя мечта', 'coast-medium.jpg', 28);
+INSERT INTO posts (user_id, content_type_id, title, page_src, views_amount)
+  VALUES (1, 5, 'Лучшие курсы', 'www.htmlacademy.ru', 1);
 
 -- добавление комментариев
 INSERT INTO comments (author_id, post_id, text_content) VALUES (1, 2, 'Ух ты! ВОоот это да!');
@@ -44,3 +44,4 @@ INSERT INTO likes (user_id, post_id) VALUES (2, 2);
 
 -- подписаться на пользователя
 INSERT INTO subscriptions (user_id, follower_id) VALUES (1, 2);
+INSERT INTO subscriptions (user_id, follower_id) VALUES (1, 3);
