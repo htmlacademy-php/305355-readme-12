@@ -1,14 +1,14 @@
 -- добавление списка типов контента для поста;
-INSERT INTO content_types (title, class_name) VALUES ('Текст', 'text');
-INSERT INTO content_types (title, class_name) VALUES ('Цитата', 'quote');
-INSERT INTO content_types (title, class_name) VALUES ('Картинка', 'photo');
-INSERT INTO content_types (title, class_name) VALUES ('Видео', 'video');
-INSERT INTO content_types (title, class_name) VALUES ('Ссылка', 'link');
+INSERT INTO content_types (title, name) VALUES ('Текст', 'text');
+INSERT INTO content_types (title, name) VALUES ('Цитата', 'quote');
+INSERT INTO content_types (title, name) VALUES ('Картинка', 'photo');
+INSERT INTO content_types (title, name) VALUES ('Видео', 'video');
+INSERT INTO content_types (title, name) VALUES ('Ссылка', 'link');
 
 -- добавлений пользователей
-INSERT INTO users (name, email, password, avatar) VALUES ('Валерий Игоревич', 'valera@site.ru', 123, 'userpic-larisa-small.jpg');
-INSERT INTO users (name, email, password, avatar) VALUES ('Дмитрий', 'dmitriy@dmitriy.site', 122333, 'userpic.jpg');
-INSERT INTO users (name, email, password, avatar) VALUES ('table_man', 'table@man.site', 0, 'userpic-mark.jpg');
+INSERT INTO users (name, email, password, avatar) VALUES ('Валерий Игоревич', 'valera@site.ru', 123, 'img/userpic-larisa-small.jpg');
+INSERT INTO users (name, email, password, avatar) VALUES ('Дмитрий', 'dmitriy@dmitriy.site', 122333, 'img/userpic.jpg');
+INSERT INTO users (name, email, password, avatar) VALUES ('table_man', 'table@man.site', 0, 'img/userpic-mark.jpg');
 
 -- добавление постов
 INSERT INTO posts (user_id, content_type_id, title, text_content, quote_author, views_amount)
@@ -16,9 +16,9 @@ INSERT INTO posts (user_id, content_type_id, title, text_content, quote_author, 
 INSERT INTO posts (user_id, content_type_id, title, text_content, views_amount)
   VALUES (2, 1, 'Игра престолов', 'Не могу дождаться начала финального сезона своего любимого сериала!', 3);
 INSERT INTO posts (user_id, content_type_id, title, image_src, views_amount)
-  VALUES (1, 3, 'Наконец, обработал фотки!', 'userpic.jpg', 17);
+  VALUES (1, 3, 'Наконец, обработал фотки!', 'img/userpic.jpg', 17);
 INSERT INTO posts (user_id, content_type_id, title, image_src, views_amount)
-  VALUES (2, 3, 'Моя мечта', 'coast-medium.jpg', 28);
+  VALUES (2, 3, 'Моя мечта', 'img/coast-medium.jpg', 28);
 INSERT INTO posts (user_id, content_type_id, title, page_src, views_amount)
   VALUES (1, 5, 'Лучшие курсы', 'www.htmlacademy.ru', 1);
 

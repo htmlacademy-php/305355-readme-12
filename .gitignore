@@ -11,3 +11,6 @@ uploads/*
 !uploads/.gitkeep
 
 .vscode/
+
+old*.php
+templates/add-post/

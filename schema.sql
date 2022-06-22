@@ -22,7 +22,7 @@ CREATE TABLE hashtags (
 CREATE TABLE content_types (
   id INT AUTO_INCREMENT,
   title VARCHAR(128),
-  class_name CHAR(128),
+  name CHAR(128),
   PRIMARY KEY (id)
 );
 
@@ -35,7 +35,7 @@ CREATE TABLE posts (
   image_src VARCHAR(255),
   video_src VARCHAR(255),
   page_src VARCHAR(255),
-  views_amount INT,
+  views_amount INT DEFAULT 0,
   user_id INT,
   content_type_id INT,
   PRIMARY KEY (id),
