@@ -43,12 +43,12 @@
                   <?php foreach ($content_types as $index => $content_type): ?>
                     <li class="popular__filters-item filters__item">
                         <a
-                          class="filters__button <?= ($content_type_id == $content_type['id']) ? 'filters__button--active' : '' ?> filters__button--<?= $content_type['class_name']; ?> button"
+                          class="filters__button <?= ($content_type_id == $content_type['id']) ? 'filters__button--active' : '' ?> filters__button--<?= $content_type['name']; ?> button"
                           href="index.php?content_type_id=<?= $content_type['id']; ?>"
                         >
                             <span class="visually-hidden"><?= $content_type['title']; ?></span>
                             <svg class="filters__icon" width="22" height="18">
-                                <use xlink:href="#icon-filter-<?= $content_type['class_name']; ?>"></use>
+                                <use xlink:href="#icon-filter-<?= $content_type['name']; ?>"></use>
                             </svg>
                         </a>
                     </li>
@@ -94,7 +94,7 @@
                         <?php case 'photo': ?>
                             <!--содержимое для поста-фото-->
                             <div class="post-photo__image-wrapper">
-                                <img src="img/<?= $post['image_src']; ?>" alt="Фото от пользователя <?= $post['user_name']; ?>" width="360" height="240">
+                                <img src="<?= $post['image_src']; ?>" alt="Фото от пользователя <?= $post['user_name']; ?>" width="360" height="240">
                             </div>
                         <?php break; ?>
 
@@ -127,7 +127,7 @@
                                     <!--укажите путь к файлу аватара-->
                                     <img
                                       class="post__author-avatar"
-                                      src="img/<?= $post['avatar']; ?>"
+                                      src="<?= $post['avatar']; ?>"
                                       alt="Аватар пользователя <?= htmlspecialchars($post['user_name']); ?>"
                                     >
                                 </div>
